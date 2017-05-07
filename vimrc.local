@@ -1,0 +1,15 @@
+" This file will be loaded at the end of .vimrc.
+" This file is designed to add your own vim scripts or override the exVim's .vimrc settings.
+
+" Colors settings
+colorscheme molokai
+
+" Windows split settings
+nmap w= :resize +3<CR>
+nmap w- :resize -3<CR>
+nmap w, :vertical resize -3<CR>
+nmap w. :vertical resize +3<CR>
+
+" Software settings
+nmap mk :!make <CR>
+nmap ml :!make ispload <CR>
