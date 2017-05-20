@@ -13,12 +13,16 @@ nmap w. :vertical resize +3<CR>
 " Software settings
 nmap mk :!make <CR>
 nmap ml :!make ispload <CR>
+nmap me :!make clean<CR>
 
 " Exsearch settings
 let g:ex_gsearch_winsize = 8
 
 " Exgproject settings
 let g:ex_project_winsize = 15
+
+" Command Update
+map <silent> <F5> :Update<CR> 
 
 " Taglist settings
 map <silent> <F9> :TlistToggle<CR> 
@@ -27,3 +31,4 @@ let Tlist_Close_On_Select = 1
 
 " EXCscope settings
 let g:ex_cscope_winsize = 8
+nmap <C-\> :CSSD<CR>
