@@ -10,15 +10,37 @@ nmap w- :resize -3<CR>
 nmap w, :vertical resize -3<CR>
 nmap w. :vertical resize +3<CR>
 
+" Font size settings
+if has("gui_running")
+  set guioptions-=T
+  set lines=60 columns=108 linespace=0
+  if has("gui_win32")
+    set guifont=DejaVu_Sans_Mono:h18:cANSI
+  else
+    set guifont=DejaVa\ Sans\ Mono\ 18
+  endif
+endif
+
+" Encoding settings
+set encoding=utf-8
+set fileencodings=utf-8,chinese,latin-1
+if has("win32")
+  set fileencoding=chinese
+else
+  set fileencoding=utf-8
+endif
+
+language messages zh_CN.utf-8
+
 " Software settings
 nmap mk :!make <CR>
 nmap ml :!make ispload <CR>
 nmap me :!make clean<CR>
 
-" Exsearch settings
+" Default plugin size settings
 let g:ex_gsearch_winsize = 8
-
-" Exgproject settings
+let g:ex_symbol_winsize = 8
+let g:ex_tags_winsize = 8
 let g:ex_project_winsize = 15
 
 " Command Update
