@@ -3,6 +3,7 @@
 
 " Colors settings
 colorscheme molokai
+set cursorline
 
 " Windows split settings
 nmap w= :resize +3<CR>
@@ -10,15 +11,46 @@ nmap w- :resize -3<CR>
 nmap w, :vertical resize -3<CR>
 nmap w. :vertical resize +3<CR>
 
-" Font size settings
-if has("gui_running")
-  set guioptions-=T
-  set lines=60 columns=108 linespace=0
-  if has("gui_win32")
-    set guifont=DejaVu_Sans_Mono:h18:cANSI
-  else
-    set guifont=DejaVa\ Sans\ Mono\ 18
-  endif
+" set default guifont
+if has('gui_running')
+    augroup ex_gui_font
+        " check and determine the gui font after GUIEnter.
+        " NOTE: getfontname function only works after GUIEnter.
+        au!
+        au GUIEnter * call s:set_gui_font()
+    augroup END
+
+    " set guifont
+    function! s:set_gui_font()
+        if has('gui_gtk2')
+            if getfontname( 'DejaVu Sans Mono for Powerline' ) != ''
+                set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
+            elseif getfontname( 'DejaVu Sans Mono' ) != ''
+                set guifont=DejaVu\ Sans\ Mono\ 12
+            else
+                set guifont=Luxi\ Mono\ 12
+            endif
+        elseif has('x11')
+            " Also for GTK 1
+            set guifont=*-lucidatypewriter-medium-r-normal-*-*-180-*-*-m-*-*
+        elseif OSX()
+            if getfontname( 'DejaVu Sans Mono for Powerline' ) != ''
+                set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h15
+            elseif getfontname( 'DejaVu Sans Mono' ) != ''
+                set guifont=DejaVu\ Sans\ Mono:h15
+            endif
+        elseif WINDOWS()
+            if getfontname( 'DejaVu Sans Mono for Powerline' ) != ''
+                set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11:cANSI
+            elseif getfontname( 'DejaVu Sans Mono' ) != ''
+                set guifont=DejaVu\ Sans\ Mono:h11:cANSI
+            elseif getfontname( 'Consolas' ) != ''
+                set guifont=Consolas:h18:cANSI " this is the default visual studio font
+            else
+                set guifont=Lucida_Console:h11:cANSI
+            endif
+        endif
+    endfunction
 endif
 
 " Encoding settings
@@ -45,6 +77,8 @@ let g:ex_project_winsize = 15
 
 " Command Update
 map <silent> <F5> :Update<CR> 
+map <silent> <F10> :!mk08_dbg_erit<CR>
+nmap <C-s> :wa<CR>
 
 " Taglist settings
 map <silent> <F9> :TlistToggle<CR> 
@@ -54,3 +88,25 @@ let Tlist_Close_On_Select = 1
 " EXCscope settings
 let g:ex_cscope_winsize = 8
 nmap <C-\> :CSSD<CR>
+
+" Doxygen settings
+let g:DoxygenToolkit_briefTag_pre="@Brief "
+let g:DoxygenToolkit_paramTag_pre="@Param "
+let g:DoxygenToolkit_returnTag="@Returns   "
+let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------"
+let g:DoxygenToolkit_blockFooter="----------------------------------------------------------------------------"
+let g:DoxygenToolkit_authorName="wuxingzhang"
+let g:DoxygenToolkit_briefTag_funcName = "yes"
+
+" Function define
+nmap st :call AddStart()<CR>
+nmap ed :call AddEnd()<CR>
+function AddStart()
+  exec "normal o"."// start ".strftime("%Y%m%d%H").expand("00x wuxingzhang")
+  exec "normal bbe"
+endfunction
+
+function AddEnd()
+  exec "normal o"."// end ".strftime("%Y%m%d%H").expand("00x wuxingzhang")
+  exec "normal bbe"
+endfunction
