@@ -5,6 +5,10 @@
 colorscheme molokai
 set cursorline
 
+" Edit settings
+set tabstop=4
+set shiftwidth=4
+
 " Windows split settings
 nmap w= :resize +3<CR>
 nmap w- :resize -3<CR>
@@ -24,30 +28,30 @@ if has('gui_running')
     function! s:set_gui_font()
         if has('gui_gtk2')
             if getfontname( 'DejaVu Sans Mono for Powerline' ) != ''
-                set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
+                set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 18
             elseif getfontname( 'DejaVu Sans Mono' ) != ''
-                set guifont=DejaVu\ Sans\ Mono\ 12
+                set guifont=DejaVu\ Sans\ Mono\ 18
             else
-                set guifont=Luxi\ Mono\ 12
+                set guifont=Luxi\ Mono\ 18
             endif
         elseif has('x11')
             " Also for GTK 1
             set guifont=*-lucidatypewriter-medium-r-normal-*-*-180-*-*-m-*-*
         elseif OSX()
             if getfontname( 'DejaVu Sans Mono for Powerline' ) != ''
-                set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h15
+                set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h18
             elseif getfontname( 'DejaVu Sans Mono' ) != ''
-                set guifont=DejaVu\ Sans\ Mono:h15
+                set guifont=DejaVu\ Sans\ Mono:h18
             endif
         elseif WINDOWS()
             if getfontname( 'DejaVu Sans Mono for Powerline' ) != ''
-                set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11:cANSI
+                set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h18:cANSI
             elseif getfontname( 'DejaVu Sans Mono' ) != ''
-                set guifont=DejaVu\ Sans\ Mono:h11:cANSI
+                set guifont=DejaVu\ Sans\ Mono:h18:cANSI
             elseif getfontname( 'Consolas' ) != ''
                 set guifont=Consolas:h18:cANSI " this is the default visual studio font
             else
-                set guifont=Lucida_Console:h11:cANSI
+                set guifont=Lucida_Console:h18:cANSI
             endif
         endif
     endfunction
@@ -74,11 +78,12 @@ let g:ex_gsearch_winsize = 8
 let g:ex_symbol_winsize = 8
 let g:ex_tags_winsize = 8
 let g:ex_project_winsize = 15
+let g:acp_behaviorKeywordCommand = "\<C-n>"
 
 " Command Update
 map <silent> <F5> :Update<CR> 
 map <silent> <F10> :!mk08_dbg_erit<CR>
-nmap <C-s> :wa<CR>
+nmap <C-a> :wa<CR>
 
 " Taglist settings
 map <silent> <F9> :TlistToggle<CR> 
