@@ -87,7 +87,6 @@ nmap <C-a> :wa<CR>
 
 " Taglist settings
 map <silent> <F9> :TlistToggle<CR> 
-let Tlist_WinWidth = 2
 let Tlist_Close_On_Select = 1
 
 " EXCscope settings
