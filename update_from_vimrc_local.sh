@@ -1,2 +1,2 @@
-cp ~/.vimrc.local vimrc.local
+cp vimrc.local ~/.vimrc.local
 echo "update successful!"
